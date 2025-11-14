@@ -1,0 +1,11 @@
+{
+  "env": {
+    "VITE_BACKEND_URL": "https://churnprediction-rsrs.onrender.com"
+  },
+  "build": {
+    "env": {
+      "VITE_BACKEND_URL": "https://churnprediction-rsrs.onrender.com"
+    }
+  }
+}
+

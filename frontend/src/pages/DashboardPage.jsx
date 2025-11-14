@@ -7,7 +7,7 @@ const DashboardPage = () => {
       <Typography 
         variant="h3" 
         component="h1" 
-        className="mb-12 font-bold text-center"
+        className="mb-4 font-bold text-center"
         sx={{
           background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
           WebkitBackgroundClip: 'text',
@@ -18,7 +18,14 @@ const DashboardPage = () => {
           letterSpacing: '-0.02em',
         }}
       >
-        Analytics Dashboard
+        Haryana Business Analytics Dashboard
+      </Typography>
+      <Typography 
+        variant="body1" 
+        className="mb-12 text-center text-gray-400"
+        sx={{ fontSize: '1.1rem', maxWidth: '800px', mx: 'auto' }}
+      >
+        Comprehensive insights into customer churn patterns across Haryana's business ecosystem
       </Typography>
 
       <ChartsOverview />

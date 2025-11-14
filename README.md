@@ -1,6 +1,8 @@
-# Churn Prediction ML System - React + FastAPI
+# Haryana Business Churn Prediction System - React + FastAPI
 
-Complete full-stack application for customer churn prediction with React frontend and FastAPI backend.
+**AI-Driven Customer Retention Platform for Haryana Businesses**
+
+Complete full-stack application for predicting customer churn, specifically designed for Haryana's retail, MSME, and service sectors. This system helps local businesses across Haryana (Gurgaon, Faridabad, Panipat, Panchkula, etc.) identify at-risk customers and implement region-specific retention strategies.
 
 ## 📁 Project Structure
 
@@ -61,18 +63,36 @@ npm run dev
 
 Frontend will run on: `http://localhost:5173`
 
+## 🎯 Haryana-Specific Features
+
+### Regional Focus
+- **Localized Strategies**: Retention recommendations tailored for Haryana market
+- **Regional Products**: Focus on Haryana products (basmati rice, dairy, textiles)
+- **Local Channels**: WhatsApp Business integration, bilingual (Hindi-English) support
+- **City-Specific**: Optimized for major Haryana cities (Gurgaon, Faridabad, Panipat, Panchkula)
+- **Cultural Alignment**: Campaigns aligned with Haryana festivals (Teej, Diwali, Baisakhi)
+- **Agricultural Calendar**: Seasonal engagement strategies for Haryana's farming community
+- **MSME Support**: Special focus on Haryana's Micro, Small & Medium Enterprises
+
+### Business Sectors Supported
+- **Retail**: Local shops and stores across Haryana
+- **MSME**: Small and medium enterprises
+- **Agriculture**: Farmers and agricultural suppliers
+- **Services**: Service providers in Haryana cities
+- **E-commerce**: Online businesses serving Haryana market
+
 ## 📋 Features
 
 ### Backend API Endpoints
 
 - `GET /health` - Health check
-- `POST /predict` - Predict churn for a customer
+- `POST /predict` - Predict churn for a customer with Haryana-specific strategies
 
 ### Frontend Pages
 
-1. **Predictor** (`/`) - Main prediction form
-2. **Dashboard** (`/dashboard`) - Analytics and charts
-3. **Customer Analysis** (`/customer`) - Individual customer analysis
+1. **Predictor** (`/`) - Main prediction form for Haryana businesses
+2. **Dashboard** (`/dashboard`) - Analytics and charts for Haryana market insights
+3. **Customer Analysis** (`/customer`) - Individual customer analysis with regional context
 
 ## 🔧 API Usage
 

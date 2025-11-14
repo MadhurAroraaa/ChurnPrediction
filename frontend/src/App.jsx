@@ -111,7 +111,7 @@ const Navigation = () => {
             backgroundClip: 'text',
           }}
         >
-          Churn Prediction System
+          Haryana Business Churn Prediction
         </Typography>
         <Button
           component={Link}

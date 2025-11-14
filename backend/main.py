@@ -14,12 +14,24 @@ import os
 app = FastAPI(title="Churn Prediction API")
 
 # Enable CORS for React frontend
+# Get allowed origins from environment or use defaults
+default_origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://churn-prediction-madhur.vercel.app",
+]
+
+# Add any additional origins from environment variable
+env_origins = os.getenv("ALLOWED_ORIGINS", "")
+if env_origins:
+    default_origins.extend([origin.strip() for origin in env_origins.split(",")])
+
+# Remove duplicates and empty strings
+allowed_origins = list(set([origin for origin in default_origins if origin]))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://churn-prediction-madhur.vercel.app"
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -165,61 +177,77 @@ async def predict_churn(customer: CustomerData):
         raise HTTPException(status_code=400, detail=f"Prediction error: {str(e)}")
 
 def generate_retention_strategies(customer: CustomerData, churn_prob: float) -> list:
-    """Generate personalized retention strategies"""
+    """Generate personalized retention strategies for Haryana businesses"""
     actions = []
     
-    # High-value customer strategies
+    # High-value customer strategies (for Haryana MSMEs and retailers)
     if customer.avg_order_value > 100:
         actions.append({
             "priority": "HIGH",
-            "action": "VIP Customer Care",
-            "details": "Assign dedicated account manager, offer premium support"
+            "action": "VIP Customer Care - Haryana Business Focus",
+            "details": "Assign dedicated relationship manager familiar with local Haryana market. Offer priority support and exclusive deals on regional products. Consider partnership with local Haryana suppliers for better pricing."
         })
     
-    # Engagement strategies
+    # Engagement strategies with Haryana context
     if customer.days_since_last_purchase > 60:
         actions.append({
             "priority": "HIGH",
-            "action": "Win-back Campaign",
-            "details": "Send personalized email with 20% discount on favorite categories"
+            "action": "Win-back Campaign - Regional Focus",
+            "details": "Send personalized WhatsApp/email in Hindi/Haryanvi with 20% discount. Highlight local Haryana products (basmati rice, dairy, textiles). Offer free delivery within Haryana districts. Partner with local festivals/events (Teej, Diwali, Baisakhi)."
         })
     
     if customer.email_open_rate < 30:
         actions.append({
             "priority": "MEDIUM",
-            "action": "Re-engagement Program",
-            "details": "Optimize email content, adjust sending frequency"
+            "action": "Re-engagement Program - Local Channels",
+            "details": "Switch to WhatsApp Business for better engagement in Haryana. Send bilingual (Hindi-English) content. Use local Haryana influencers or community leaders. Time messages according to local business hours (avoid harvest seasons for farmers)."
         })
     
-    # Loyalty strategies
+    # Loyalty strategies with Haryana context
     if customer.loyalty_program == 0:
         actions.append({
             "priority": "MEDIUM",
-            "action": "Loyalty Program Enrollment",
-            "details": "Offer bonus points for joining loyalty program"
+            "action": "Haryana Loyalty Program Enrollment",
+            "details": "Offer bonus points redeemable at local Haryana partner stores. Provide discounts on regional products. Include benefits like free home delivery in Gurgaon, Faridabad, Panipat, etc. Partner with Haryana Tourism for exclusive offers."
         })
     
-    # Product and service improvements
+    # Product and service improvements for Haryana market
     if customer.return_rate > 15:
         actions.append({
             "priority": "HIGH",
-            "action": "Quality Assurance",
-            "details": "Investigate high return rate, offer product consultation"
+            "action": "Quality Assurance - Local Standards",
+            "details": "Investigate returns - ensure products meet Haryana quality standards. Offer product consultation in local language. Provide easy return pickup from major Haryana cities. Partner with local quality certification bodies."
         })
     
     if customer.support_tickets > 3:
         actions.append({
             "priority": "HIGH",
-            "action": "Proactive Support",
-            "details": "Schedule follow-up call to resolve ongoing issues"
+            "action": "Proactive Support - Regional Service",
+            "details": "Schedule follow-up call with Hindi/Haryanvi speaking support staff. Offer on-site service in major Haryana cities (Gurgaon, Faridabad, Panchkula). Partner with local service centers. Provide WhatsApp support for faster resolution."
         })
     
-    # Default action if no specific strategies
+    # Haryana-specific strategies based on channel
+    if customer.channel == "mobile" and customer.mobile_usage_pct > 70:
+        actions.append({
+            "priority": "MEDIUM",
+            "action": "Mobile-First Engagement",
+            "details": "Optimize for mobile users (high in Haryana). Launch mobile app with regional language support. Offer mobile-exclusive deals. Partner with local mobile payment providers (Paytm, PhonePe popular in Haryana)."
+        })
+    
+    # Agriculture/Seasonal considerations for Haryana
+    if customer.avg_order_value < 50 and customer.total_purchases < 3:
+        actions.append({
+            "priority": "MEDIUM",
+            "action": "Seasonal Engagement Strategy",
+            "details": "Time campaigns around Haryana's agricultural calendar. Offer seasonal products (winter clothing, monsoon essentials). Consider local festivals and harvest seasons. Partner with Haryana's MSME sector for bundled offers."
+        })
+    
+    # Default action with Haryana context
     if not actions:
         actions.append({
             "priority": "LOW",
-            "action": "Standard Engagement",
-            "details": "Continue standard customer engagement practices"
+            "action": "Standard Haryana Business Engagement",
+            "details": "Continue standard engagement with focus on local Haryana market preferences. Maintain bilingual communication. Support local Haryana businesses and suppliers. Stay aligned with regional business practices."
         })
     
     return actions

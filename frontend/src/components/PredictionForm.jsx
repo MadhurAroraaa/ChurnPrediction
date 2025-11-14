@@ -39,7 +39,16 @@ const PredictionForm = ({ onPrediction }) => {
       const prediction = await predictChurn(formData);
       onPrediction(prediction);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to predict churn. Please try again.');
+      // Better error messages
+      let errorMessage = 'Failed to predict churn. ';
+      if (err.message) {
+        errorMessage += err.message;
+      } else if (err.response?.data?.detail) {
+        errorMessage += err.response.data.detail;
+      } else {
+        errorMessage += 'Please check if the backend server is running and try again.';
+      }
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -54,7 +63,7 @@ const PredictionForm = ({ onPrediction }) => {
         <Typography 
           variant="h5" 
           component="h2" 
-          className="mb-8 font-bold text-2xl"
+          className="mb-4 font-bold text-2xl"
           sx={{ 
             background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
             WebkitBackgroundClip: 'text',
@@ -62,11 +71,19 @@ const PredictionForm = ({ onPrediction }) => {
             backgroundClip: 'text',
           }}
         >
-          Customer Churn Predictor
+          Customer Information
+        </Typography>
+        <Typography 
+          variant="body2" 
+          className="mb-8 text-gray-400"
+          sx={{ fontSize: '0.95rem' }}
+        >
+          Enter your business customer data to predict churn risk. 
+          Optimized for Haryana's retail, MSME, and service sectors.
         </Typography>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <TextField
               label="Average Order Value (Rs.)"
               name="avg_order_value"

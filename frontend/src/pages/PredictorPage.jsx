@@ -16,7 +16,7 @@ const PredictorPage = () => {
       <Typography 
         variant="h3" 
         component="h1" 
-        className="mb-12 font-bold text-center"
+        className="mb-4 font-bold text-center"
         sx={{
           background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
           WebkitBackgroundClip: 'text',
@@ -27,10 +27,18 @@ const PredictorPage = () => {
           letterSpacing: '-0.02em',
         }}
       >
-        Customer Churn Predictor
+        Haryana Business Churn Predictor
+      </Typography>
+      <Typography 
+        variant="body1" 
+        className="mb-12 text-center text-gray-400"
+        sx={{ fontSize: '1.1rem', maxWidth: '800px', mx: 'auto' }}
+      >
+        Empowering Haryana businesses with AI-driven customer retention insights. 
+        Predict churn risk for local retailers, MSMEs, and service providers across the state.
       </Typography>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
         <div>
           <PredictionForm onPrediction={handlePrediction} />
         </div>
@@ -48,15 +56,15 @@ const PredictorPage = () => {
         {!prediction && (
           <Box className="flex items-center justify-center h-full min-h-[500px]">
             <div className="text-center">
-              <Typography 
-                variant="h6" 
+              <Typography
+                variant="h6"
                 className="text-gray-400 mb-2"
                 sx={{ fontSize: '1.25rem' }}
               >
                 Ready to Predict
               </Typography>
-              <Typography 
-                variant="body2" 
+              <Typography
+                variant="body2"
                 className="text-gray-500"
                 sx={{ fontSize: '0.95rem' }}
               >

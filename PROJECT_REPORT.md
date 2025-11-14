@@ -1,7 +1,9 @@
-# 📊 Churn Prediction ML System - Complete Project Report
+# 📊 Haryana Business Churn Prediction System - Complete Project Report
 
-**Project Name:** AI-Driven Customer Churn Prediction System  
+**Project Name:** AI-Driven Customer Churn Prediction System for Haryana Businesses  
 **Technology Stack:** React + FastAPI + Machine Learning  
+**Geographic Focus:** Haryana, India  
+**Target Sectors:** Retail, MSME, Agriculture, Services  
 **Date:** November 2024  
 **Version:** 1.0
 
@@ -30,13 +32,19 @@
 
 ## 1. Executive Summary
 
-This project is a **full-stack web application** that predicts customer churn using machine learning. It combines:
+This project is a **full-stack web application** that predicts customer churn using machine learning, specifically designed for **Haryana businesses**. It combines:
 
-- **Backend:** FastAPI server serving ML predictions
-- **Frontend:** React-based user interface with Material UI
+- **Backend:** FastAPI server serving ML predictions with Haryana-specific strategies
+- **Frontend:** React-based user interface with Material UI and regional branding
 - **ML Engine:** Multiple algorithms (Random Forest, XGBoost, Neural Network)
 
-The system helps businesses identify customers at risk of churning and provides actionable retention strategies.
+The system helps **Haryana businesses** (retailers, MSMEs, service providers) identify customers at risk of churning and provides **region-specific retention strategies** tailored for the Haryana market, including:
+- Local product focus (basmati rice, dairy, textiles)
+- Bilingual communication (Hindi-English)
+- WhatsApp Business integration
+- City-specific delivery and services
+- Cultural festival alignment
+- Agricultural calendar considerations
 
 ---
 
@@ -44,22 +52,26 @@ The system helps businesses identify customers at risk of churning and provides 
 
 ### 2.1 Purpose
 
-Predict customer churn probability and recommend retention strategies to reduce customer attrition.
+Predict customer churn probability and recommend **Haryana-specific retention strategies** to reduce customer attrition for businesses operating in Haryana state.
 
 ### 2.2 Key Objectives
 
-1. **Predict Churn:** Calculate probability of customer churning
+1. **Predict Churn:** Calculate probability of customer churning for Haryana businesses
 2. **Risk Assessment:** Classify customers as LOW/MEDIUM/HIGH risk
-3. **Actionable Insights:** Provide personalized retention recommendations
-4. **User-Friendly Interface:** Easy-to-use web application
-5. **Real-Time Predictions:** Instant results via API
+3. **Regional Strategies:** Provide Haryana-specific retention recommendations
+4. **Local Market Focus:** Support Haryana's retail, MSME, and service sectors
+5. **Cultural Alignment:** Align strategies with Haryana's business culture and festivals
+6. **User-Friendly Interface:** Easy-to-use web application with regional context
+7. **Real-Time Predictions:** Instant results via API
 
 ### 2.3 Target Users
 
-- Business analysts
-- Customer success teams
-- Marketing departments
-- Data scientists
+- **Haryana Business Owners:** Retailers, shop owners, MSME entrepreneurs
+- **Customer Success Teams:** Working with Haryana market
+- **Marketing Departments:** Targeting Haryana customers
+- **Business Analysts:** Analyzing Haryana market data
+- **Government Agencies:** Supporting Haryana's business ecosystem
+- **Data Scientists:** Working on regional business intelligence
 
 ---
 
