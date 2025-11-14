@@ -1,0 +1,20 @@
+[
+  "customer_age",
+  "account_age_days",
+  "total_purchases",
+  "avg_order_value",
+  "days_since_last_purchase",
+  "website_visits",
+  "email_open_rate",
+  "support_tickets",
+  "product_categories_browsed",
+  "avg_session_duration_min",
+  "loyalty_program",
+  "discount_usage",
+  "review_count",
+  "payment_failures",
+  "return_rate",
+  "mobile_usage_pct",
+  "channel_encoded",
+  "channel_encoded"
+]
