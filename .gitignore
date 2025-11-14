@@ -1,0 +1,18 @@
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Mac OS junk files
+.DS_Store
+
+# Machine Learning artifacts
+*.pkl
+*.h5
+
+# Node / React
+node_modules/
+dist/
