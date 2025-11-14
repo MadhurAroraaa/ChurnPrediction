@@ -1,7 +1,13 @@
 import { useState } from 'react';
-import { TextField, Button, MenuItem, Card, CardContent, Typography } from '@mui/material';
 import { predictChurn } from '../api/api';
+import Card from './ui/Card';
+import Button from './ui/Button';
+import InputField from './ui/InputField';
+import Dropdown from './ui/Dropdown';
 
+/**
+ * Prediction Form Component - Clean Tailwind implementation
+ */
 const PredictionForm = ({ onPrediction }) => {
   const [formData, setFormData] = useState({
     avg_order_value: 50.0,
@@ -39,7 +45,6 @@ const PredictionForm = ({ onPrediction }) => {
       const prediction = await predictChurn(formData);
       onPrediction(prediction);
     } catch (err) {
-      // Better error messages
       let errorMessage = 'Failed to predict churn. ';
       if (err.message) {
         errorMessage += err.message;
@@ -55,292 +60,150 @@ const PredictionForm = ({ onPrediction }) => {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto" sx={{ 
-      background: 'linear-gradient(135deg, rgba(17, 17, 17, 0.9) 0%, rgba(30, 30, 30, 0.9) 100%)',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-    }}>
-      <CardContent className="p-8">
-        <Typography 
-          variant="h5" 
-          component="h2" 
-          className="mb-4 font-bold text-2xl"
-          sx={{ 
-            background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
+    <Card className="w-full max-w-2xl mx-auto glow">
+      <div className="mb-8">
+        <h2 className="text-2xl font-display font-bold mb-3 gradient-text">
           Customer Information
-        </Typography>
-        <Typography 
-          variant="body2" 
-          className="mb-8 text-gray-400"
-          sx={{ fontSize: '0.95rem' }}
-        >
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed">
           Enter your business customer data to predict churn risk. 
           Optimized for Haryana's retail, MSME, and service sectors.
-        </Typography>
+        </p>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <TextField
-              label="Average Order Value (Rs.)"
-              name="avg_order_value"
-              type="number"
-              value={formData.avg_order_value}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ step: 0.01, min: 0 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <InputField
+            label="Average Order Value (Rs.)"
+            name="avg_order_value"
+            type="number"
+            value={formData.avg_order_value}
+            onChange={handleChange}
+            required
+            step="0.01"
+            min="0"
+            helperText="Average amount per order in Indian Rupees"
+          />
 
-            <TextField
-              label="Total Purchases"
-              name="total_purchases"
-              type="number"
-              value={formData.total_purchases}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ min: 0 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+          <InputField
+            label="Total Purchases"
+            name="total_purchases"
+            type="number"
+            value={formData.total_purchases}
+            onChange={handleChange}
+            required
+            min="0"
+            helperText="Total number of purchases made"
+          />
 
-            <TextField
-              label="Email Open Rate (%)"
-              name="email_open_rate"
-              type="number"
-              value={formData.email_open_rate}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ step: 0.1, min: 0, max: 100 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+          <InputField
+            label="Email Open Rate (%)"
+            name="email_open_rate"
+            type="number"
+            value={formData.email_open_rate}
+            onChange={handleChange}
+            required
+            step="0.1"
+            min="0"
+            max="100"
+            helperText="Percentage of marketing emails opened"
+          />
 
-            <TextField
-              label="Days Since Last Purchase"
-              name="days_since_last_purchase"
-              type="number"
-              value={formData.days_since_last_purchase}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ min: 0 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+          <InputField
+            label="Days Since Last Purchase"
+            name="days_since_last_purchase"
+            type="number"
+            value={formData.days_since_last_purchase}
+            onChange={handleChange}
+            required
+            min="0"
+            helperText="Number of days since customer's last purchase"
+          />
 
-            <TextField
-              label="Loyalty Program"
-              name="loyalty_program"
-              select
-              value={formData.loyalty_program}
-              onChange={handleChange}
-              required
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            >
-              <MenuItem value={0}>No</MenuItem>
-              <MenuItem value={1}>Yes</MenuItem>
-            </TextField>
+          <Dropdown
+            label="Loyalty Program"
+            name="loyalty_program"
+            value={formData.loyalty_program}
+            onChange={handleChange}
+            required
+            options={[
+              { value: 0, label: 'No' },
+              { value: 1, label: 'Yes' },
+            ]}
+            className="md:col-span-1"
+          />
 
-            <TextField
-              label="Website Visits"
-              name="website_visits"
-              type="number"
-              value={formData.website_visits}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ min: 0 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+          <InputField
+            label="Website Visits"
+            name="website_visits"
+            type="number"
+            value={formData.website_visits}
+            onChange={handleChange}
+            required
+            min="0"
+            helperText="Total number of website visits"
+          />
 
-            <TextField
-              label="Return Rate (%)"
-              name="return_rate"
-              type="number"
-              value={formData.return_rate}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ step: 0.1, min: 0, max: 100 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+          <InputField
+            label="Return Rate (%)"
+            name="return_rate"
+            type="number"
+            value={formData.return_rate}
+            onChange={handleChange}
+            required
+            step="0.1"
+            min="0"
+            max="100"
+            helperText="Percentage of products returned"
+          />
 
-            <TextField
-              label="Support Tickets"
-              name="support_tickets"
-              type="number"
-              value={formData.support_tickets}
-              onChange={handleChange}
-              required
-              fullWidth
-              inputProps={{ min: 0 }}
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            />
+          <InputField
+            label="Support Tickets"
+            name="support_tickets"
+            type="number"
+            value={formData.support_tickets}
+            onChange={handleChange}
+            required
+            min="0"
+            helperText="Number of customer support tickets raised"
+          />
 
-            <TextField
-              label="Channel"
-              name="channel"
-              select
-              value={formData.channel}
-              onChange={handleChange}
-              required
-              fullWidth
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(59, 130, 246, 0.5)',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#3b82f6',
-                  },
-                },
-              }}
-            >
-              <MenuItem value="web">Web</MenuItem>
-              <MenuItem value="mobile">Mobile</MenuItem>
-              <MenuItem value="app">App</MenuItem>
-            </TextField>
-          </div>
+          <Dropdown
+            label="Channel"
+            name="channel"
+            value={formData.channel}
+            onChange={handleChange}
+            required
+            options={[
+              { value: 'web', label: 'Web' },
+              { value: 'mobile', label: 'Mobile' },
+              { value: 'app', label: 'App' },
+            ]}
+            className="md:col-span-2"
+          />
+        </div>
 
-          {error && (
-            <div className="bg-red-900/30 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg backdrop-blur-sm">
-              {error}
-            </div>
-          )}
-
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            fullWidth
-            disabled={loading}
-            sx={{
-              mt: 3,
-              py: 2,
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              background: loading 
-                ? 'rgba(59, 130, 246, 0.5)' 
-                : 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-              boxShadow: '0 4px 20px rgba(59, 130, 246, 0.4)',
-              '&:hover': {
-                background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-                boxShadow: '0 6px 30px rgba(59, 130, 246, 0.6)',
-                transform: 'translateY(-2px)',
-              },
-              '&:disabled': {
-                background: 'rgba(59, 130, 246, 0.3)',
-              },
-            }}
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-risk-high/10 border border-risk-high/30 text-risk-high px-4 py-3 rounded-xl"
           >
-            {loading ? 'Predicting...' : 'Predict Churn'}
-          </Button>
-        </form>
-      </CardContent>
+            {error}
+          </motion.div>
+        )}
+
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          disabled={loading}
+          loading={loading}
+          className="w-full mt-8"
+        >
+          {loading ? 'Predicting...' : 'Predict Churn'}
+        </Button>
+      </form>
     </Card>
   );
 };

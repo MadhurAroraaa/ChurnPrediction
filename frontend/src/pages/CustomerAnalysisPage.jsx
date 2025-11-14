@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
-import { Container, Typography, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { predictChurn } from '../api/api';
 import RiskCard from '../components/RiskCard';
 import StrategyList from '../components/StrategyList';
 import PredictionForm from '../components/PredictionForm';
+import PageHeader from '../components/ui/PageHeader';
+import AnimatedContainer from '../components/ui/AnimatedContainer';
+import Container from '../components/ui/Container';
+import Dropdown from '../components/ui/Dropdown';
 
+/**
+ * Customer Analysis Page - Premium individual customer analysis
+ */
 const CustomerAnalysisPage = () => {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -54,114 +61,114 @@ const CustomerAnalysisPage = () => {
   };
 
   return (
-    <Container maxWidth="xl" className="py-12 px-6">
-      <Typography 
-        variant="h3" 
-        component="h1" 
-        className="mb-4 font-bold text-center"
-        sx={{
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          fontSize: '3rem',
-          fontWeight: 800,
-          letterSpacing: '-0.02em',
-        }}
-      >
-        Individual Customer Analysis
-      </Typography>
-      <Typography 
-        variant="body1" 
-        className="mb-12 text-center text-gray-400"
-        sx={{ fontSize: '1.1rem', maxWidth: '800px', mx: 'auto' }}
-      >
-        Analyze individual customers from your Haryana business database with personalized retention strategies
-      </Typography>
+    <AnimatedContainer>
+      <Container className="py-12 md:py-16">
+        <PageHeader
+          title="Individual Customer Analysis"
+          description="Analyze individual customers from your Haryana business database with personalized retention strategies"
+          showMap={true}
+        />
 
-      <div className="mb-8 mt-10">
-        <FormControl fullWidth className="mb-4" sx={{ mb: 3 }}>
-          <InputLabel className="text-gray-400">Select Customer ID</InputLabel>
-          <Select
+        <div className="mb-8">
+          <Dropdown
+            label="Select Customer ID"
+            name="customer"
             value={selectedCustomer}
             onChange={(e) => {
               setSelectedCustomer(e.target.value);
               handleCustomerSelect(e.target.value);
             }}
-            label="Select Customer ID"
-            sx={{
-              color: 'white',
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'rgba(255, 255, 255, 0.2)',
-              },
-              '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'rgba(59, 130, 246, 0.5)',
-              },
-              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#3b82f6',
-              },
-            }}
-          >
-            {sampleCustomers.map((customer) => (
-              <MenuItem key={customer.id} value={customer.id}>
-                {customer.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            options={sampleCustomers.map(c => ({ value: c.id, label: c.name }))}
+            className="max-w-md"
+          />
 
-        {error && (
-          <div className="bg-red-900/30 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg backdrop-blur-sm mb-4">
-            {error}
-          </div>
-        )}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div>
-          <PredictionForm onPrediction={handleFormPrediction} />
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 bg-risk-high/10 border border-risk-high/30 text-risk-high px-4 py-3 rounded-lg max-w-md"
+            >
+              {error}
+            </motion.div>
+          )}
         </div>
 
-        {prediction && (
-          <div className="space-y-6">
-            <RiskCard
-              churnProbability={prediction.churn_probability}
-              riskLevel={prediction.risk_level}
-            />
-            <StrategyList actions={prediction.actions} />
-          </div>
-        )}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Form Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <PredictionForm onPrediction={handleFormPrediction} />
+          </motion.div>
 
-        {!prediction && !loading && (
-          <Box className="flex items-center justify-center h-full min-h-[500px]">
-            <div className="text-center">
-              <Typography 
-                variant="h6" 
-                className="text-gray-400 mb-2"
-                sx={{ fontSize: '1.25rem' }}
-              >
-                Select a Customer
-              </Typography>
-              <Typography 
-                variant="body2" 
-                className="text-gray-500"
-                sx={{ fontSize: '0.95rem' }}
-              >
-                Select a customer from the dropdown or use the form to analyze a customer
-              </Typography>
-            </div>
-          </Box>
-        )}
-
-        {loading && (
-          <Box className="flex items-center justify-center h-full min-h-[500px]">
-            <Typography variant="body1" className="text-gray-400">
-              Analyzing customer...
-            </Typography>
-          </Box>
-        )}
-      </div>
-    </Container>
+          {/* Results Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6"
+          >
+            {loading ? (
+              <div className="flex items-center justify-center h-full min-h-[500px]">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full mx-auto mb-6"
+                  />
+                  <p className="text-text-secondary text-lg">Analyzing customer...</p>
+                </motion.div>
+              </div>
+            ) : prediction ? (
+              <>
+                <RiskCard
+                  churnProbability={prediction.churn_probability}
+                  riskLevel={prediction.risk_level}
+                />
+                <StrategyList actions={prediction.actions} />
+              </>
+            ) : (
+              <div className="flex items-center justify-center h-full min-h-[500px]">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-center"
+                >
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: 'easeInOut'
+                    }}
+                    className="mb-6"
+                  >
+                    <svg className="w-20 h-20 mx-auto text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </motion.div>
+                  <h3 className="text-2xl font-display font-semibold text-text-primary mb-3">
+                    Select a Customer
+                  </h3>
+                  <p className="text-text-secondary max-w-sm mx-auto">
+                    Select a customer from the dropdown or use the form to analyze a customer
+                  </p>
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      </Container>
+    </AnimatedContainer>
   );
 };
 

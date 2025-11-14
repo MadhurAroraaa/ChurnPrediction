@@ -1,9 +1,15 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import PredictionForm from '../components/PredictionForm';
 import RiskCard from '../components/RiskCard';
 import StrategyList from '../components/StrategyList';
-import { Container, Typography, Box } from '@mui/material';
+import PageHeader from '../components/ui/PageHeader';
+import AnimatedContainer from '../components/ui/AnimatedContainer';
+import Container from '../components/ui/Container';
 
+/**
+ * Predictor Page - Premium Haryana-themed prediction interface
+ */
 const PredictorPage = () => {
   const [prediction, setPrediction] = useState(null);
 
@@ -12,69 +18,76 @@ const PredictorPage = () => {
   };
 
   return (
-    <Container maxWidth="xl" className="py-12 px-6">
-      <Typography 
-        variant="h3" 
-        component="h1" 
-        className="mb-4 font-bold text-center"
-        sx={{
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          fontSize: '3rem',
-          fontWeight: 800,
-          letterSpacing: '-0.02em',
-        }}
-      >
-        Haryana Business Churn Predictor
-      </Typography>
-      <Typography 
-        variant="body1" 
-        className="mb-12 text-center text-gray-400"
-        sx={{ fontSize: '1.1rem', maxWidth: '800px', mx: 'auto' }}
-      >
-        Empowering Haryana businesses with AI-driven customer retention insights. 
-        Predict churn risk for local retailers, MSMEs, and service providers across the state.
-      </Typography>
+    <AnimatedContainer>
+      <Container className="py-12 md:py-16">
+        <PageHeader
+          title="Haryana Business Churn Predictor"
+          description="Empowering Haryana businesses with AI-driven customer retention insights. Predict churn risk for local retailers, MSMEs, and service providers across the state."
+          showMap={true}
+        />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-        <div>
-          <PredictionForm onPrediction={handlePrediction} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Form Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <PredictionForm onPrediction={handlePrediction} />
+          </motion.div>
+
+          {/* Results Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6"
+          >
+            {prediction ? (
+              <>
+                <RiskCard
+                  churnProbability={prediction.churn_probability}
+                  riskLevel={prediction.risk_level}
+                />
+                <StrategyList actions={prediction.actions} />
+              </>
+            ) : (
+              <div className="flex items-center justify-center h-full min-h-[500px]">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-center"
+                >
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeInOut'
+                    }}
+                    className="mb-6"
+                  >
+                    <svg className="w-20 h-20 mx-auto text-primary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </motion.div>
+                  <h3 className="text-2xl font-display font-semibold text-text-primary mb-3">
+                    Ready to Predict
+                  </h3>
+                  <p className="text-text-secondary max-w-sm mx-auto">
+                    Fill out the form and click "Predict Churn" to see AI-powered insights for your Haryana business
+                  </p>
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
         </div>
-
-        {prediction && (
-          <div className="space-y-6">
-            <RiskCard
-              churnProbability={prediction.churn_probability}
-              riskLevel={prediction.risk_level}
-            />
-            <StrategyList actions={prediction.actions} />
-          </div>
-        )}
-
-        {!prediction && (
-          <Box className="flex items-center justify-center h-full min-h-[500px]">
-            <div className="text-center">
-              <Typography
-                variant="h6"
-                className="text-gray-400 mb-2"
-                sx={{ fontSize: '1.25rem' }}
-              >
-                Ready to Predict
-              </Typography>
-              <Typography
-                variant="body2"
-                className="text-gray-500"
-                sx={{ fontSize: '0.95rem' }}
-              >
-                Fill out the form and click "Predict Churn" to see results
-              </Typography>
-            </div>
-          </Box>
-        )}
-      </div>
-    </Container>
+      </Container>
+    </AnimatedContainer>
   );
 };
 
