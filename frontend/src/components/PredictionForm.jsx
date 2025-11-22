@@ -28,11 +28,7 @@ const PredictionForm = ({ onPrediction }) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: name === 'loyalty_program' || name === 'total_purchases' || name === 'website_visits' || name === 'support_tickets'
-        ? parseInt(value) || 0
-        : name === 'channel'
-        ? value
-        : parseFloat(value) || 0
+      [name]: value === '' ? '' : e.target.type === 'number' ? Number(value) : value
     }));
   };
 
