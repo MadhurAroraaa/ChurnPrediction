@@ -65,7 +65,7 @@ Frontend will run on: `http://localhost:5173`
 
 
 
-###Focus
+### Focus
 - **Localized Strategies**: Retention recommendations tailored for Haryana market
 - **Regional Products**: Focus on Haryana products (basmati rice, dairy, textiles)
 - **Local Channels**: WhatsApp Business integration, bilingual (Hindi-English) support
