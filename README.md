@@ -1,8 +1,8 @@
-# Haryana Business Churn Prediction System - React + FastAPI
+# Churn Prediction System - React + FastAPI
 
-**AI-Driven Customer Retention Platform for Haryana Businesses**
+**AI-Driven Customer Retention Platform**
 
-Complete full-stack application for predicting customer churn, specifically designed for Haryana's retail, MSME, and service sectors. This system helps local businesses across Haryana (Gurgaon, Faridabad, Panipat, Panchkula, etc.) identify at-risk customers and implement region-specific retention strategies.
+Complete full-stack application for predicting customer churn, specifically designed for Haryana's retail, MSME, and service sectors. identify at-risk customers and implement region-specific retention strategies.
 
 ## 📁 Project Structure
 
@@ -63,9 +63,9 @@ npm run dev
 
 Frontend will run on: `http://localhost:5173`
 
-## 🎯 Haryana-Specific Features
 
-### Regional Focus
+
+###Focus
 - **Localized Strategies**: Retention recommendations tailored for Haryana market
 - **Regional Products**: Focus on Haryana products (basmati rice, dairy, textiles)
 - **Local Channels**: WhatsApp Business integration, bilingual (Hindi-English) support
