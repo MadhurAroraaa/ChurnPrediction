@@ -77,7 +77,7 @@ const StrategyList = ({ actions }) => {
           Recommended Retention Strategies
         </h3>
         <p className="text-text-muted text-sm">
-          Personalized actions for Haryana businesses
+          Personalized actions to retain your customers.
         </p>
       </div>
 

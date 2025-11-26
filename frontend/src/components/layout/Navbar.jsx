@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 /**
- * Premium Navigation Bar with Haryana-themed accents
+ * Premium Navigation Bar with theme toggle
  */
-const Navbar = () => {
+const Navbar = ({ theme = 'dark', onToggleTheme = () => {} }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const isLight = theme === 'light';
   
   // Close mobile menu when route changes
   useEffect(() => {
@@ -35,38 +36,19 @@ const Navbar = () => {
   ];
   
   return (
-    <nav className="border-b border-border/50 glass sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
+    <nav className="border-b border-border/50 glass sticky top-0 z-50 bg-bg/80 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand with Haryana accent */}
           <Link to="/" className="flex items-center group">
             <motion.div
               whileHover={{ scale: 1.02 }}
               className="flex items-center gap-2"
             >
-              {/* Subtle Haryana accent dot */}
-              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-primary via-accent-haryana to-accent animate-pulse" />
               <span className="font-display font-bold text-lg gradient-text">
-                Haryana Business Churn Predictor
+                Churn Predictor
               </span>
             </motion.div>
           </Link>
-          
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-text-secondary hover:text-text-primary hover:bg-background-hover focus:outline-none"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
@@ -102,6 +84,48 @@ const Navbar = () => {
                 </Link>
               );
             })}
+
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              aria-pressed={isLight}
+              className="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-bg-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg transition-colors"
+            >
+              {isLight ? (
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                  <path d="M21.75 15.5A9 9 0 1 1 10.2 2.3a7 7 0 0 0 11.55 13.2z" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="M4.93 4.93l1.41 1.41" />
+                  <path d="M17.66 17.66l1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="M6.34 17.66l-1.41 1.41" />
+                  <path d="M19.07 4.93l-1.41 1.41" />
+                </svg>
+              )}
+              <span>{isLight ? 'Dark' : 'Light'} Mode</span>
+            </button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-text-secondary hover:text-text-primary hover:bg-bg-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
           </div>
         </div>
         
@@ -124,14 +148,25 @@ const Navbar = () => {
                       to={item.path}
                       className={`block px-3 py-2 rounded-md text-base font-medium ${
                         isActive
-                          ? 'bg-background-hover text-text-primary'
-                          : 'text-text-secondary hover:bg-background-hover hover:text-text-primary'
+                          ? 'bg-bg-hover text-text-primary'
+                          : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
                       }`}
                     >
                       {item.label}
                     </Link>
                   );
                 })}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    onToggleTheme();
+                    setIsOpen(false);
+                  }}
+                  className="w-full mt-2 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-base font-medium text-text-secondary hover:text-text-primary hover:bg-bg-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bg"
+                >
+                  {isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                </button>
               </div>
             </motion.div>
           )}

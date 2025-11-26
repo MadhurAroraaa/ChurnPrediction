@@ -62,8 +62,7 @@ const PredictionForm = ({ onPrediction }) => {
           Customer Information
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed">
-          Enter your business customer data to predict churn risk. 
-          Optimized for Haryana's retail, MSME, and service sectors.
+          Enter customer profile data to predict churn risk across your portfolio.
         </p>
       </div>
 

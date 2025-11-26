@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 
 /**
- * Premium Page Header with optional Haryana map silhouette
+ * Premium Page Header
  */
-const PageHeader = ({ title, description, showMap = false, className = '' }) => {
+const PageHeader = ({ title, description, className = '' }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -11,20 +11,6 @@ const PageHeader = ({ title, description, showMap = false, className = '' }) => 
       transition={{ duration: 0.5 }}
       className={`text-center mb-12 relative ${className}`}
     >
-      {/* Optional Haryana map silhouette (very subtle) */}
-      {showMap && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.05, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-          <div className="text-9xl font-bold text-primary/5 select-none">
-            हरियाणा
-          </div>
-        </motion.div>
-      )}
-      
       <div className="relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 /**
- * Premium Button component with gradients and Haryana accents
+ * Premium Button component with gradient accents
  */
 const Button = ({ 
   children, 
@@ -17,7 +17,6 @@ const Button = ({
   const variants = {
     primary: 'bg-gradient-primary text-white shadow-lg shadow-primary/30 hover:shadow-glow',
     secondary: 'bg-gradient-to-r from-accent to-accent-hover text-white shadow-lg shadow-accent/30 hover:shadow-accent/40',
-    haryana: 'bg-gradient-to-r from-primary via-accent-haryana to-accent text-white shadow-lg shadow-primary/30 hover:shadow-glow',
     outline: 'border-2 border-border hover:border-primary text-text-primary hover:text-primary bg-transparent hover:bg-gradient-subtle',
     ghost: 'text-text-secondary hover:text-text-primary hover:bg-bg-card/50',
   };

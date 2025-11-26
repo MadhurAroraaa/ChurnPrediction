@@ -7,16 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Modern Premium Design System with Haryana accents
+        // Modern Premium Design System
         bg: {
-          DEFAULT: '#0d0d0f',
-          card: '#1a1a1d',
-          elevated: '#242428',
+          DEFAULT: 'rgb(var(--color-bg) / <alpha-value>)',
+          card: 'rgb(var(--color-bg-card) / <alpha-value>)',
+          elevated: 'rgb(var(--color-bg-elevated) / <alpha-value>)',
+          hover: 'rgb(var(--color-bg-hover) / <alpha-value>)',
         },
         border: {
-          DEFAULT: 'rgba(255, 255, 255, 0.08)',
-          hover: 'rgba(255, 255, 255, 0.12)',
-          glow: 'rgba(99, 102, 241, 0.3)',
+          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
+          hover: 'rgb(var(--color-border-hover) / <alpha-value>)',
+          strong: 'rgb(var(--color-border-strong) / <alpha-value>)',
         },
         // Primary: Modern Indigo (premium SaaS feel)
         primary: {
@@ -25,23 +26,17 @@ export default {
           light: '#818cf8',
           dark: '#4338ca',
         },
-        // Accent: Purple (modern) + Haryana Green (subtle)
+        // Accent: Indigo/Violet
         accent: {
           DEFAULT: '#8b5cf6',
           hover: '#7c3aed',
-          haryana: '#2e7d32', // Haryana green (use subtly)
-        },
-        // Haryana Heritage Colors (use VERY sparingly)
-        heritage: {
-          mustard: '#f4c430', // Use at 10-20% opacity only
-          emerald: '#207a39', // Haryana green
-          earth: '#6b4f2e', // Earth brown
         },
         text: {
-          primary: '#ffffff',
-          secondary: '#a3a3a3',
-          muted: '#6b7280',
-          accent: '#818cf8',
+          primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
+          tertiary: 'rgb(var(--color-text-tertiary) / <alpha-value>)',
+          muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
+          accent: 'rgb(var(--color-text-accent) / <alpha-value>)',
         },
         // Risk level colors (premium gradients)
         risk: {
@@ -67,7 +62,6 @@ export default {
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-        'gradient-haryana': 'linear-gradient(135deg, #2e7d32 0%, #207a39 100%)',
         'gradient-subtle': 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)',
       },
       backdropBlur: {

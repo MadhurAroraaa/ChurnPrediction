@@ -8,7 +8,7 @@ import AnimatedContainer from '../components/ui/AnimatedContainer';
 import Container from '../components/ui/Container';
 
 /**
- * Predictor Page - Premium Haryana-themed prediction interface
+ * Predictor Page - Premium churn prediction interface
  */
 const PredictorPage = () => {
   const [prediction, setPrediction] = useState(null);
@@ -21,9 +21,8 @@ const PredictorPage = () => {
     <AnimatedContainer>
       <Container className="py-12 md:py-16">
         <PageHeader
-          title="Haryana Business Churn Predictor"
-          description="Empowering Haryana businesses with AI-driven customer retention insights. Predict churn risk for local retailers, MSMEs, and service providers across the state."
-          showMap={true}
+          title="Customer Churn Predictor"
+          description="Empower your teams with AI-driven customer retention insights for every segment."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -79,7 +78,7 @@ const PredictorPage = () => {
                     Ready to Predict
                   </h3>
                   <p className="text-text-secondary max-w-sm mx-auto">
-                    Fill out the form and click "Predict Churn" to see AI-powered insights for your Haryana business
+                    Fill out the form and click "Predict Churn" to see AI-powered insights for your business.
                   </p>
                 </motion.div>
               </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import PredictorPage from './pages/PredictorPage';
@@ -11,9 +11,29 @@ import Navbar from './components/layout/Navbar';
  */
 function App() {
   const [showPopup, setShowPopup] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+    }
+    return 'dark';
+  });
 
   const closePopup = () => {
     setShowPopup(false);
+  };
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'light') {
+      root.classList.add('theme-light');
+    } else {
+      root.classList.remove('theme-light');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
   
   return (
@@ -60,7 +80,7 @@ function App() {
         {/* Background gradient overlay */}
         <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
         
-        <Navbar />
+        <Navbar theme={theme} onToggleTheme={toggleTheme} />
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<PredictorPage />} />

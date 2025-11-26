@@ -65,8 +65,7 @@ const CustomerAnalysisPage = () => {
       <Container className="py-12 md:py-16">
         <PageHeader
           title="Individual Customer Analysis"
-          description="Analyze individual customers from your Haryana business database with personalized retention strategies"
-          showMap={true}
+          description="Analyze individual customers from your data warehouse with personalized retention strategies."
         />
 
         <div className="mb-8">

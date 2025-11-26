@@ -13,9 +13,8 @@ const DashboardPage = () => {
     <AnimatedContainer>
       <Container className="py-12 md:py-16">
         <PageHeader
-          title="Haryana Business Analytics Dashboard"
-          description="Comprehensive insights into customer churn patterns across Haryana's business ecosystem"
-          showMap={true}
+          title="Churn Analytics Dashboard"
+          description="Comprehensive insights into customer churn patterns across your business ecosystem."
         />
 
         <ChartsOverview />
